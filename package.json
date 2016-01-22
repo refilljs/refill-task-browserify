@@ -27,7 +27,6 @@
   },
   "dependencies": {
     "browserify": "13.0.0",
-    "browserify-ngannotate": "2.0.0",
     "gulp-if": "2.0.0",
     "gulp-rev": "6.0.1",
     "gulp-streamify": "1.0.2",

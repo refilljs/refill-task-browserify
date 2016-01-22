@@ -2,7 +2,6 @@
 
 var source = require('vinyl-source-stream');
 var browserify = require('browserify');
-var browserifyNgannotate = require('browserify-ngannotate');
 var watchify = require('watchify');
 var uglify = require('gulp-uglify');
 var rev = require('gulp-rev');
@@ -16,9 +15,7 @@ var defaultOptions = {
   devEntries: 'src/dev/index.js',
   prodEntries: 'src/index.js',
   testEntries: 'src/test/index.js',
-  browserifyTransforms: [
-    browserifyNgannotate
-  ]
+  browserifyTransforms: []
 };
 
 module.exports = {
