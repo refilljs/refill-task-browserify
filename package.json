@@ -1,6 +1,6 @@
 {
   "name": "zkflow-task-browserify",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Browserify task in zkflow format",
   "main": "src/browserifyTask.js",
   "repository": {
