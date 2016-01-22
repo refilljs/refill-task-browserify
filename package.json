@@ -1,0 +1,28 @@
+{
+  "name": "zkflow-task-browserify",
+  "version": "0.0.0",
+  "description": "Browserify task in zkflow format",
+  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zaklinaczekodu/zkflow-task-browserify.git"
+  },
+  "keywords": [
+    "gulp",
+    "zkflow",
+    "tasks"
+  ],
+  "author": "Piotr Baranowski <piotr.baranowski@zaklinaczekodu.com> (https://github.com/zaklinaczekodu)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zaklinaczekodu/zkflow-task-browserify/issues"
+  },
+  "homepage": "https://github.com/zaklinaczekodu/zkflow-task-browserify",
+  "devDependencies": {
+    "gulp": "3.9.0",
+    "gulp-zkflow-nodemodule": "0.1.1"
+  },
+  "peerDependencies": {
+    "gulp": "3.*"
+  }
+}
