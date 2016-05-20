@@ -12,6 +12,7 @@ var watch = require('gulp-watch');
 var q = require('q');
 
 var defaultOptions = {
+  watchifyOptions: {},
   devEntries: 'src/dev/index.js',
   prodEntries: 'src/index.js',
   testEntries: 'src/test/index.js',
@@ -26,7 +27,6 @@ module.exports = {
 function getBrowserifyTask(options, gulp, mode, getOutputDir) {
 
   function browserifyTask(next) {
-
     var logger = zkutils.logger('js');
     var bundler;
     var nextHandler;
@@ -105,13 +105,17 @@ function getBrowserifyTask(options, gulp, mode, getOutputDir) {
     }
 
     function runBrowserify() {
-
       bundler = browserify({
         cache: {},
         packageCache: {},
         fullPaths: true,
         entries: getEntries(),
-        debug: mode.env === 'dev'
+        debug: mode.env === 'dev',
+        noParse: options.noParse
+      });
+
+      options.ignore.forEach(function(ignore){
+        bundler.ignore(ignore);
       });
 
       options.browserifyTransforms.forEach(function(transform) {
@@ -119,7 +123,7 @@ function getBrowserifyTask(options, gulp, mode, getOutputDir) {
       });
 
       if (mode.watch) {
-        bundler = watchify(bundler);
+        bundler = watchify(bundler, options.watchifyOptions);
       }
 
       rebundlePromise = rebundle()
