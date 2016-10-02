@@ -1,34 +1,38 @@
-# ZKflow task browserify
+Refill task browserify
+======================
 
-Browserify task in zkflow format
+Browserify task in refill format
 
-Made by Zaklinacze Kodu
+[<img alt="Made by Zaklinacze Kodu" src="http://zaklinaczekodu.com/_assets/madeBy.svg" width="200">](http://zaklinaczekodu.com)
+
+[Facebook](https://www.facebook.com/zaklinaczekodu)
 
 Shields
 -------
 
-[![npm](https://img.shields.io/npm/v/zkflow-task-browserify.svg?style=flat-square)](https://www.npmjs.com/package/zkflow-task-browserify)
-[![npm](https://img.shields.io/npm/l/zkflow-task-browserify.svg?style=flat-square)](https://www.npmjs.com/package/zkflow-task-browserify)
-[![npm](https://img.shields.io/npm/dm/zkflow-task-browserify.svg?style=flat-square)](https://www.npmjs.com/package/zkflow-task-browserify)<br>
-[![Travis](https://img.shields.io/travis/zaklinaczekodu/zkflow-task-browserify/master.svg?style=flat-square)](https://travis-ci.org/zaklinaczekodu/zkflow-task-browserify)
-[![Code Climate](https://img.shields.io/codeclimate/github/zaklinaczekodu/zkflow-task-browserify.svg?style=flat-square)](https://codeclimate.com/github/zaklinaczekodu/zkflow-task-browserify)<br>
-[![David](https://img.shields.io/david/zaklinaczekodu/zkflow-task-browserify.svg?style=flat-square)](https://david-dm.org/zaklinaczekodu/zkflow-task-browserify)
-[![David](https://img.shields.io/david/dev/zaklinaczekodu/zkflow-task-browserify.svg?style=flat-square)](https://david-dm.org/zaklinaczekodu/zkflow-task-browserify)<br>
-[![GitHub forks](https://img.shields.io/github/forks/zaklinaczekodu/zkflow-task-browserify.svg?style=flat-square)](https://github.com/zaklinaczekodu/zkflow-task-browserify)
-[![GitHub stars](https://img.shields.io/github/stars/zaklinaczekodu/zkflow-task-browserify.svg?style=flat-square)](https://github.com/zaklinaczekodu/zkflow-task-browserify)
-[![GitHub followers](https://img.shields.io/github/followers/zaklinaczekodu.svg?style=flat-square)](https://github.com/zaklinaczekodu/zkflow-task-browserify)
+[![npm](https://img.shields.io/npm/v/refill-task-browserify.svg?style=flat-square)](https://www.npmjs.com/package/refill-task-browserify)
+[![npm](https://img.shields.io/npm/l/refill-task-browserify.svg?style=flat-square)](https://www.npmjs.com/package/refill-task-browserify)
+[![npm](https://img.shields.io/npm/dm/refill-task-browserify.svg?style=flat-square)](https://www.npmjs.com/package/refill-task-browserify)
+[![Travis](https://img.shields.io/travis/refilljs/refill-task-browserify/master.svg?style=flat-square)](https://travis-ci.org/refilljs/refill-task-browserify)<br>
+[![bitHound Overall Score](https://www.bithound.io/github/refilljs/refill-task-browserify/badges/score.svg)](https://www.bithound.io/github/refilljs/refill-task-browserify)
+[![bitHound Dependencies](https://www.bithound.io/github/refilljs/refill-task-browserify/badges/dependencies.svg)](https://www.bithound.io/github/refilljs/refill-task-browserify/master/dependencies/npm)
+[![bitHound Dev Dependencies](https://www.bithound.io/github/refilljs/refill-task-browserify/badges/devDependencies.svg)](https://www.bithound.io/github/refilljs/refill-task-browserify/master/dependencies/npm)
+[![bitHound Code](https://www.bithound.io/github/refilljs/refill-task-browserify/badges/code.svg)](https://www.bithound.io/github/refilljs/refill-task-browserify)<br>
+[![GitHub forks](https://img.shields.io/github/forks/refilljs/refill-task-browserify.svg?style=flat-square)](https://github.com/refilljs/refill-task-browserify)
+[![GitHub stars](https://img.shields.io/github/stars/refilljs/refill-task-browserify.svg?style=flat-square)](https://github.com/refilljs/refill-task-browserify)
+[![GitHub watchers](https://img.shields.io/github/watchers/refilljs/refill-task-browserify.svg?style=flat-square)](https://github.com/refilljs/refill-task-browserify)
 
 Installation
 ------------
 
 ```bash
-npm install --save zkflow-task-browserify zkflow gulp
+npm install --save refill-task-browserify refill gulp
 ```
 
 Example
 -------
 
-ZKflow taks browserify is used in [ZKflow for Angular](https://github.com/zaklinaczekodu/zkflow-angular)
+Refill taks browserify is used in [Refill for Angular](https://github.com/refilljs/refill-angular)
 
 Usage
 -----
@@ -36,9 +40,9 @@ Usage
 gulpfile.js
 
 ```javaScript
-require('zkflow')({
+require('refill')({
   js: {
-    task: require('zkflow-task-browserify')
+    task: require('refill-task-browserify')
   }
 }, require('gulp'), mode, getOutputDir)
 ```
@@ -79,3 +83,14 @@ Default options
   browserifyTransforms: []
 }
 ```
+
+Changelog
+---------
+
+[Changelog at github](https://github.com/refilljs/refill-task-browserify/releases)
+
+Sponsors
+--------
+
+[<img alt="Zaklinacze Kodu" src="http://zaklinaczekodu.com/_assets/logo.svg" width="200">](http://zaklinaczekodu.com)
+

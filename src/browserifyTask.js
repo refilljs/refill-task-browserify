@@ -7,9 +7,10 @@ var uglify = require('gulp-uglify');
 var rev = require('gulp-rev');
 var gulpif = require('gulp-if');
 var streamify = require('gulp-streamify');
-var zkutils = require('gulp-zkflow-utils');
 var watch = require('gulp-watch');
-var q = require('q');
+var refillGlobby = require('refill-globby');
+var refillLogger = require('refill-logger');
+var RefillNextHandler = require('refill-next-handler');
 
 var defaultOptions = {
   devEntries: 'src/dev/index.js',
@@ -27,7 +28,7 @@ function getBrowserifyTask(options, gulp, mode, getOutputDir) {
 
   function browserifyTask(next) {
 
-    var logger = zkutils.logger('js');
+    var logger = refillLogger('js');
     var bundler;
     var nextHandler;
     var rebundlePromise;
@@ -46,7 +47,7 @@ function getBrowserifyTask(options, gulp, mode, getOutputDir) {
       'Your js entry files are determined by globs\n' +
       options.prodEntries.toString() + '\n\n' +
       'You can add some matching files with JavaScript.\n' +
-      'Learn more about ZKFlow JavaScript toolstack:\n' +
+      'Learn more about Refill JavaScript toolstack:\n' +
       'https://angularjs.org/\n' +
       'http://browserify.org/\n' +
       'https://github.com/omsmith/browserify-ngannotate\n';
@@ -67,17 +68,17 @@ function getBrowserifyTask(options, gulp, mode, getOutputDir) {
 
     function rebundle() {
 
-      var deferred = q.defer();
+      return nextHandler.handle(new Promise(function (resolve, reject) {
 
-      bundler.bundle()
-        .on('error', deferred.reject)
-        .pipe(source('index.js'))
-        .pipe(gulpif(mode.env !== 'dev' && !mode.watch, streamify(uglify(options.uglify))))
-        .pipe(gulpif(mode.env !== 'dev' && !mode.watch, streamify(rev())))
-        .pipe(gulp.dest(getOutputDir()))
-        .on('end', deferred.resolve);
+        bundler.bundle()
+          .on('error', reject)
+          .pipe(source('index.js'))
+          .pipe(gulpif(mode.env !== 'dev' && !mode.watch, streamify(uglify(options.uglify))))
+          .pipe(gulpif(mode.env !== 'dev' && !mode.watch, streamify(rev())))
+          .pipe(gulp.dest(getOutputDir()))
+          .on('end', resolve);
 
-      return nextHandler.handle(deferred.promise);
+      }));
 
     }
 
@@ -85,7 +86,7 @@ function getBrowserifyTask(options, gulp, mode, getOutputDir) {
 
       function checkProdEntries() {
         return nextHandler.handle(
-          zkutils.globby(options.prodEntries, noJsFilesMessage), {
+          refillGlobby(options.prodEntries, noJsFilesMessage), {
             ignoreFailures: true,
             handleSuccess: false
           });
@@ -95,7 +96,7 @@ function getBrowserifyTask(options, gulp, mode, getOutputDir) {
         return checkProdEntries();
       }
 
-      return zkutils.globby(getEntries(), noEnvJsFilesMessage)
+      return refillGlobby(getEntries(), noEnvJsFilesMessage)
         .catch(function(error) {
           logger.info(error);
           mode.angularMainModuleProdFallback = true;
@@ -123,19 +124,21 @@ function getBrowserifyTask(options, gulp, mode, getOutputDir) {
       }
 
       rebundlePromise = rebundle()
-        .finally(function() {
-          if (!mode.watch) {
-            return;
-          }
-          bundler.on('update', function(path) {
-            logger.changed(path);
-            rebundlePromise = rebundlePromise.finally(rebundle);
-          });
+        .then(rebundleOnUpdate, rebundleOnUpdate);
+
+      function rebundleOnUpdate() {
+        if (!mode.watch) {
+          return;
+        }
+        bundler.on('update', function(path) {
+          logger.changed(path);
+          rebundlePromise = rebundlePromise.then(rebundle, rebundle);
         });
+      }
 
     }
 
-    nextHandler = new zkutils.NextHandler({
+    nextHandler = new RefillNextHandler({
       next: next,
       watch: mode.watch,
       logger: logger
@@ -143,24 +146,26 @@ function getBrowserifyTask(options, gulp, mode, getOutputDir) {
 
     checkEntries()
       .then(runBrowserify)
-      .finally(function() {
-        if (!mode.watch) {
-          return;
-        }
-        watch(
-            getEntries(), {
-              events: ['add', 'unlink']
-            })
-          .on('add', function(event) {
-            logger.changed(event);
-            runBrowserify();
-          })
-          .on('unlink', function(event) {
-            logger.changed(event);
-            bundler.close();
-            logger.finished();
-          });
-      });
+      .then(watchEntries, watchEntries);
+
+    function watchEntries() {
+      if (!mode.watch) {
+        return;
+      }
+      watch(
+        getEntries(), {
+          events: ['add', 'unlink']
+        })
+        .on('add', function(event) {
+          logger.changed(event);
+          runBrowserify();
+        })
+        .on('unlink', function(event) {
+          logger.changed(event);
+          bundler.close();
+          logger.finished();
+        });
+    }
 
   }
 

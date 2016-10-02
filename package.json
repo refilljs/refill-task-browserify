@@ -1,39 +1,40 @@
 {
-  "name": "zkflow-task-browserify",
+  "name": "refill-task-browserify",
   "version": "1.0.0",
-  "description": "Browserify task in zkflow format",
+  "description": "Browserify task in Refill format",
   "main": "src/browserifyTask.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/zaklinaczekodu/zkflow-task-browserify.git"
+    "url": "https://github.com/refilljs/refill-task-browserify.git"
   },
   "keywords": [
     "gulp",
-    "zkflow",
+    "refill",
     "tasks"
   ],
   "author": "Piotr Baranowski <piotr.baranowski@zaklinaczekodu.com> (https://github.com/zaklinaczekodu)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/zaklinaczekodu/zkflow-task-browserify/issues"
+    "url": "https://github.com/refilljs/refill-task-browserify/issues"
   },
-  "homepage": "https://github.com/zaklinaczekodu/zkflow-task-browserify",
+  "homepage": "https://github.com/refilljs/refill-task-browserify",
   "devDependencies": {
-    "gulp": "3.9.0",
-    "gulp-zkflow-nodemodule": "0.1.1"
+    "gulp": "3.9.1",
+    "refill-node": "^2.0.0"
   },
   "peerDependencies": {
-    "gulp": "3.*"
+    "gulp": "^3"
   },
   "dependencies": {
-    "browserify": "13.0.0",
-    "gulp-if": "2.0.0",
-    "gulp-rev": "6.0.1",
+    "browserify": "13.1.0",
+    "gulp-if": "2.0.1",
+    "gulp-rev": "7.1.2",
     "gulp-streamify": "1.0.2",
-    "gulp-uglify": "1.5.1",
-    "gulp-watch": "4.3.5",
-    "gulp-zkflow-utils": "0.4.1",
-    "q": "1.4.1",
+    "gulp-uglify": "2.0.0",
+    "gulp-watch": "4.3.10",
+    "refill-globby": "^1.0.1",
+    "refill-logger": "^1.0.3",
+    "refill-next-handler": "^1.1.1",
     "vinyl-source-stream": "1.1.0",
     "watchify": "3.7.0"
   }
