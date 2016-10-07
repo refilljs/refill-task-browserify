@@ -11,12 +11,20 @@ var watch = require('gulp-watch');
 var refillGlobby = require('refill-globby');
 var refillLogger = require('refill-logger');
 var RefillNextHandler = require('refill-next-handler');
+var browserifyNgannotate = require('browserify-ngannotate');
+var babelify = require('babelify');
+var babelPresetEs2015 = require('babel-preset-es2015');
 
 var defaultOptions = {
   devEntries: 'src/dev/index.js',
   prodEntries: 'src/index.js',
   testEntries: 'src/test/index.js',
-  browserifyTransforms: []
+  browserifyTransforms: [
+    [babelify, {
+      presets: [babelPresetEs2015]
+    }],
+    browserifyNgannotate
+  ]
 };
 
 module.exports = {
@@ -40,7 +48,7 @@ function getBrowserifyTask(options, gulp, mode, getOutputDir) {
       getEntries().toString() + '\n\n' +
       'You can add some environment specific js to handle mocks.\n' +
       'Learn more about AngularJS mocks:\n' +
-      'https://code.angularjs.org/1.4.7/docs/api/ngMockE2E\n';
+      'https://code.angularjs.org/1.5.8/docs/api/ngMockE2E\n';
 
     var noJsFilesMessage =
       '\nNo js entry files found.\n\n' +
@@ -50,6 +58,7 @@ function getBrowserifyTask(options, gulp, mode, getOutputDir) {
       'Learn more about Refill JavaScript toolstack:\n' +
       'https://angularjs.org/\n' +
       'http://browserify.org/\n' +
+      'https://babeljs.io/\n' +
       'https://github.com/omsmith/browserify-ngannotate\n';
 
     function getEntries() {

@@ -80,7 +80,12 @@ Default options
   prodEntries: 'src/index.js',
   testEntries: 'src/test/index.js',
   uglify: undefined,                    // gulp-uglify options
-  browserifyTransforms: []
+  browserifyTransforms: [
+    [babelify, {
+      presets: [babelPresetEs2015]
+    }],
+    browserifyNgannotate
+  ]
 }
 ```
 
