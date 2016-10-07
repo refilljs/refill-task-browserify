@@ -19,23 +19,26 @@
   },
   "homepage": "https://github.com/refilljs/refill-task-browserify",
   "devDependencies": {
-    "gulp": "3.9.1",
+    "gulp": "^3.9.1",
     "refill-node": "^2.0.0"
   },
   "peerDependencies": {
     "gulp": "^3"
   },
   "dependencies": {
-    "browserify": "13.1.0",
-    "gulp-if": "2.0.1",
-    "gulp-rev": "7.1.2",
-    "gulp-streamify": "1.0.2",
-    "gulp-uglify": "2.0.0",
-    "gulp-watch": "4.3.10",
+    "babel-preset-es2015": "^6.16.0",
+    "babelify": "^7.3.0",
+    "browserify": "^13.1.0",
+    "browserify-ngannotate": "^2.0.0",
+    "gulp-if": "^2.0.1",
+    "gulp-rev": "^7.1.2",
+    "gulp-streamify": "^1.0.2",
+    "gulp-uglify": "^2.0.0",
+    "gulp-watch": "^4.3.10",
     "refill-globby": "^1.0.1",
     "refill-logger": "^1.0.3",
     "refill-next-handler": "^1.1.1",
-    "vinyl-source-stream": "1.1.0",
-    "watchify": "3.7.0"
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.7.0"
   }
 }
